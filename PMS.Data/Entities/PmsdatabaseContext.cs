@@ -29,6 +29,11 @@ public partial class PmsdatabaseContext : DbContext
     public virtual DbSet<User> Users { get; set; }
 
     /// <summary>
+    /// The Product Entity
+    /// </summary>
+    public virtual DbSet<Product> Products { get; set; }
+
+    /// <summary>
     /// The On Configuring DB
     /// </summary>
     /// <param name="optionsBuilder">The DB Context Options Builder</param>
@@ -43,7 +48,28 @@ public partial class PmsdatabaseContext : DbContext
         modelBuilder.Entity<User>(entity =>
         {
             entity.ToTable("users");
+            entity.Property(e => e.UserName).IsRequired();
+            entity.Property(e => e.EmailId).IsRequired();
+            entity.Property(e => e.ContactNumber).IsRequired();
+            entity.Property(e => e.IsActive).IsRequired();
         });
+
+        modelBuilder.Entity<Product>(entity =>
+        {
+            entity.ToTable("products");
+            entity.Property(e => e.ProductName).IsRequired();
+            entity.Property(e => e.ProductGuid).IsRequired();
+            entity.Property(e => e.Price).IsRequired();
+            entity.Property(e => e.IsActive).IsRequired();
+        });
+
+        OnModelCreatingPartial(modelBuilder);
     }
+
+    /// <summary>
+    /// The Partial Model Creation Method
+    /// </summary>
+    /// <param name="modelBuilder">The Model Builder</param>
+    partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 
 }
