@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PMS.Data.Entities;
 
@@ -10,9 +11,11 @@ using PMS.Data.Entities;
 namespace PMS.Data.Migrations
 {
     [DbContext(typeof(PmsdatabaseContext))]
-    partial class PmsdatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20230520113013_ProductsMigration")]
+    partial class ProductsMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
